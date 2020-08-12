@@ -1,0 +1,46 @@
+#main {
+	border:2px solid red;
+	/*height:100vh; */
+}
+#header {
+	height:60px;
+	display:flex;
+	justify-content:space-between;
+	background-color:blue;
+}
+#header > div {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+#menu {
+  border:2px solid white;
+  color:white;  
+}
+#menu a {
+	color:white;
+}
+#logo {
+  background-color:orange;
+  color:white;
+  margin-left:20px;
+  width:80px; 
+}
+#engru {
+	display:flex;
+	justify-content:center;
+	margin:10px;
+}
+#buttons {
+	margin-top:67vh;
+	
+}
+#display,#secdisplay {
+	margin:80px 10px 10px 10px;
+}
+#buttons > button{
+	height:50px;
+	width:50%;
+	
+	
+}

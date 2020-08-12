@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Translator</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="main">
+  <section id="header">
+    <div id="logo">FARID</div>
+	<div id="menu">
+	  <a href="#">WORDS</a><a href="#">MENU</a>
+	</div>
+  </section>
+  <section id="content">
+    <div id="engru"><button id="enbut">En</button><button id="rubut">Ru</button></div>
+    <p id="display"></p>
+	<p id="secdisplay"></p>
+  </section>
+  <div id="buttons"><button id="left">LEFT</button><button id="right">RIGHT</button></div>
+</div>
+
+<script>
+var verb=[
+           ["I threw the banana peel into the bin","Я выбросил банановую кожуру в урну"],
+		   ["She started to throw things at me in anger","Со злости она начала швыряться в меня вещами"],
+		   ["The boy threw the ball over the fence","Мальчик кинул мяч через забор"],
+		   ["My sister threw her dress onto the bed in a hurry","Моя сестра второпях швырнула платье на кровать"],
+		   ["New software allows to skip unnecessary steps","Новое программное обеспечение позволяет пропускать ненужные шаги"],
+		   ["I threw away unnecessary documents","Я выбросил лишние документы"],
+		   ["you're getting upset unnecessarily","Вы зря расстраиваетесь"],
+		   ["the unnecessarily strident tone of the President’s remarks","Неоправданно резкий тон замечаний президента"]
+		 ];
+		 
+function randomRange(myMin, myMax) {return Math.floor(Math.random()*(myMax-myMin+1)) + myMin;}; //функция получения случайного числа		 
+//при начальной загрузке
+document.getElementById("display").innerHTML=  verb[randomRange(0, verb.length-1)][1];
+document.getElementById("rubut").style.backgroundColor = "hsl(0,0%,50%)";
+
+
+</script>
+</body>
+</html>
+
+
