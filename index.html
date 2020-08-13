@@ -23,6 +23,7 @@
 </div>
 
 <script>
+
 var verb=[
            ["I threw the banana peel into the bin","Я выбросил банановую кожуру в урну"],
 		   ["She started to throw things at me in anger","Со злости она начала швыряться в меня вещами"],
@@ -30,14 +31,54 @@ var verb=[
 		   ["My sister threw her dress onto the bed in a hurry","Моя сестра второпях швырнула платье на кровать"],
 		   ["New software allows to skip unnecessary steps","Новое программное обеспечение позволяет пропускать ненужные шаги"],
 		   ["I threw away unnecessary documents","Я выбросил лишние документы"],
-		   ["you're getting upset unnecessarily","Вы зря расстраиваетесь"],
-		   ["the unnecessarily strident tone of the President’s remarks","Неоправданно резкий тон замечаний президента"]
+		   ["You're getting upset unnecessarily","Вы зря расстраиваетесь"],
+		   ["The unnecessarily strident tone of the President’s remarks","Неоправданно резкий тон замечаний президента"],
+		   ["This actor's performance impressed me","Игра этого актёра впечатлила меня"],
+		   ["Pirates hid their treasures in caves","Пираты прятали свои сокровища в пещерах"],
+		   ["I treasure my childhood memories","Я дорожу своими детскими воспоминаниями"],
+		   ["his assistant is a real treasure","его помощница – просто клад"],
+		   ["treasure in heart the recollection of former days","хранить в сердце память о прошлом"],
+		   ["I'm going to treasure it forever","Я буду хранить его вечно"]
 		 ];
-		 
-function randomRange(myMin, myMax) {return Math.floor(Math.random()*(myMax-myMin+1)) + myMin;}; //функция получения случайного числа		 
+function ru(){
+  document.getElementById("display").innerHTML=  verb[firstRandom][1];
+  document.getElementById("rubut").style.backgroundColor = "hsl(0,0%,50%)";
+  clickedLanguage=1;
+}	 
+function randomRange(myMin, myMax) {return Math.floor(Math.random()*(myMax-myMin+1)) + myMin;}; //функция получения случайного числа
+function showTranslate(){
+  
+  if(clickedLanguage===1  ){
+    secDisplay.innerHTML = verb[firstRandom][0];
+	clickedLanguage=0;
+  }
+  else{ 
+    firstRandom +=1
+	if(firstRandom>verb.length-1){
+	  firstRandom=0;  
+	}
+    display.innerHTML = verb[firstRandom][1];
+    secDisplay.innerHTML = "";
+	clickedLanguage=1;
+  }	
+ /* else {
+    secDisplay.innerHTML = verb[firstRandom][1];
+	secDisplayShow = 1;
+  } */
+}
+var clickedLanguage=0;
+var secDisplayShow=0;
+var firstRandom = randomRange(0, verb.length-1);  //	получение случайного числа от 0 до verb.length-1
+var rightbut = document.getElementById("right");	
+var display =document.getElementById("display");	 
+var secDisplay = document.getElementById("secdisplay");
 //при начальной загрузке
-document.getElementById("display").innerHTML=  verb[randomRange(0, verb.length-1)][1];
-document.getElementById("rubut").style.backgroundColor = "hsl(0,0%,50%)";
+ru();
+
+//нажатие кнопки right and left
+rightbut.addEventListener("click", function(){showTranslate();});
+
+
 
 
 </script>
