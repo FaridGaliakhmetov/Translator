@@ -40,17 +40,17 @@ var verb=[
 		   ["treasure in heart the recollection of former days","хранить в сердце память о прошлом"],
 		   ["I'm going to treasure it forever","Я буду хранить его вечно"]
 		 ];
-function ru(){
+function ru(){    // функция переключает на русский язык
   document.getElementById("display").innerHTML=  verb[firstRandom][1];
   document.getElementById("rubut").style.backgroundColor = "hsl(0,0%,50%)";
-  clickedLanguage=1;
-}	 
+  clickedLanguage="ru";
+}
+	 
 function randomRange(myMin, myMax) {return Math.floor(Math.random()*(myMax-myMin+1)) + myMin;}; //функция получения случайного числа
-function showTranslate(){
-  
-  if(clickedLanguage===1  ){
+function rightArrow(){
+  if(clickedLanguage==="ru" && secDisplayShow===0 ){
     secDisplay.innerHTML = verb[firstRandom][0];
-	clickedLanguage=0;
+	secDisplayShow=1;
   }
   else{ 
     firstRandom +=1
@@ -59,27 +59,35 @@ function showTranslate(){
 	}
     display.innerHTML = verb[firstRandom][1];
     secDisplay.innerHTML = "";
-	clickedLanguage=1;
+	secDisplayShow=0;
   }	
- /* else {
-    secDisplay.innerHTML = verb[firstRandom][1];
-	secDisplayShow = 1;
-  } */
 }
-var clickedLanguage=0;
-var secDisplayShow=0;
+
+function leftArrow(){
+  firstRandom-=1;
+  if(firstRandom<0){
+    firstRandom=verb.length-1;
+  }
+  display.innerHTML =verb[firstRandom][1];
+  secDisplay.innerHTML="";
+  secDisplayShow=0;
+}
+
+
+var clickedLanguage;     // показывает какой язык выбран
+var secDisplayShow=0;   // показывает отображен ли перевод фразы 0-нет 1-да
 var firstRandom = randomRange(0, verb.length-1);  //	получение случайного числа от 0 до verb.length-1
-var rightbut = document.getElementById("right");	
+var rightbut = document.getElementById("right");
+var leftbut= document.getElementById("left");	
 var display =document.getElementById("display");	 
 var secDisplay = document.getElementById("secdisplay");
+
 //при начальной загрузке
-ru();
+ru();  //переключает на русский язык по умолчанию при загрузке страницы
 
 //нажатие кнопки right and left
-rightbut.addEventListener("click", function(){showTranslate();});
-
-
-
+rightbut.addEventListener("click", function(){rightArrow();});
+leftbut.addEventListener("click", function(){leftArrow();});
 
 </script>
 </body>

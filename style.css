@@ -34,6 +34,10 @@
 	justify-content:center;
 	margin:10px;
 }
+#engru > button {
+	background-color:hsl(150,50%,80%);
+	color:black;
+}
 #buttons {
 	margin-top:20vh;
 	
