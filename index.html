@@ -9,15 +9,17 @@
 <body>
 <div id="main">
   <section id="header">
-    <div id="logo">FARID</div>
+    <div id="logo">FARID<span>G</span></div>
 	<div id="menu">
 	  <a href="#">WORDS</a><a href="#">MENU</a>
 	</div>
   </section>
   <section id="content">
-    <div id="engru"><button id="enbut">En</button><button id="rubut">Ru</button></div>
-    <p id="display"></p>
-	<p id="secdisplay"></p>
+    <div id="contentcenter">
+      <div id="engru"><button id="enbut">En</button><button id="rubut">Ru</button></div>
+      <p id="display"></p>
+	  <p id="secdisplay"></p>
+	</div>
   </section>
   <div id="buttons"><button id="left">LEFT</button><button id="right">RIGHT</button></div>
 </div>
@@ -42,22 +44,45 @@ var verb=[
 		 ];
 function ru(){    // функция переключает на русский язык
   document.getElementById("display").innerHTML=  verb[firstRandom][1];
+  document.getElementById("secdisplay").innerHTML=  "";
   document.getElementById("rubut").style.backgroundColor = "hsl(0,0%,50%)";
+  document.getElementById("enbut").style.backgroundColor = "hsl(150,50%,80%)";
   clickedLanguage="ru";
+  
+}
+
+function en(){    // функция переключает на английский язык
+  document.getElementById("display").innerHTML=  verb[firstRandom][0];
+  document.getElementById("secdisplay").innerHTML=  "";
+  document.getElementById("enbut").style.backgroundColor = "hsl(0,0%,50%)";
+  document.getElementById("rubut").style.backgroundColor = "hsl(150,50%,80%)";
+  clickedLanguage="en";
 }
 	 
 function randomRange(myMin, myMax) {return Math.floor(Math.random()*(myMax-myMin+1)) + myMin;}; //функция получения случайного числа
+
 function rightArrow(){
   if(clickedLanguage==="ru" && secDisplayShow===0 ){
     secDisplay.innerHTML = verb[firstRandom][0];
 	secDisplayShow=1;
-  }
-  else{ 
+  }else if(clickedLanguage==="ru" && secDisplayShow===1){ 
     firstRandom +=1
 	if(firstRandom>verb.length-1){
 	  firstRandom=0;  
 	}
     display.innerHTML = verb[firstRandom][1];
+    secDisplay.innerHTML = "";
+	secDisplayShow=0;
+  }	
+  if(clickedLanguage==="en" && secDisplayShow===0 ){
+    secDisplay.innerHTML = verb[firstRandom][1];
+	secDisplayShow=1;
+  }else if(clickedLanguage==="en" && secDisplayShow===1){ 
+    firstRandom +=1
+	if(firstRandom>verb.length-1){
+	  firstRandom=0;  
+	}
+    display.innerHTML = verb[firstRandom][0];
     secDisplay.innerHTML = "";
 	secDisplayShow=0;
   }	
@@ -68,15 +93,24 @@ function leftArrow(){
   if(firstRandom<0){
     firstRandom=verb.length-1;
   }
-  display.innerHTML =verb[firstRandom][1];
-  secDisplay.innerHTML="";
-  secDisplayShow=0;
+  if(clickedLanguage==="ru"){
+    display.innerHTML =verb[firstRandom][1];
+    secDisplay.innerHTML="";
+    secDisplayShow=0;
+  }
+  else{
+    display.innerHTML =verb[firstRandom][0];
+    secDisplay.innerHTML="";
+    secDisplayShow=0;
+  }
 }
 
 
-var clickedLanguage;     // показывает какой язык выбран
+var clickedLanguage;     // показывает какой язык выбран "ru" по умолчанию
 var secDisplayShow=0;   // показывает отображен ли перевод фразы 0-нет 1-да
 var firstRandom = randomRange(0, verb.length-1);  //	получение случайного числа от 0 до verb.length-1
+var enBut = document.getElementById("enbut");
+var ruBut = document.getElementById("rubut");
 var rightbut = document.getElementById("right");
 var leftbut= document.getElementById("left");	
 var display =document.getElementById("display");	 
@@ -85,6 +119,8 @@ var secDisplay = document.getElementById("secdisplay");
 //при начальной загрузке
 ru();  //переключает на русский язык по умолчанию при загрузке страницы
 
+enBut.addEventListener("click", function(){en();});
+ruBut.addEventListener("click", function(){ru();});
 //нажатие кнопки right and left
 rightbut.addEventListener("click", function(){rightArrow();});
 leftbut.addEventListener("click", function(){leftArrow();});
