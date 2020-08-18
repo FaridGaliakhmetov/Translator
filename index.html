@@ -3,15 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Translator</title>
 <link rel="stylesheet" type="text/css" href="style.css">
+<style>
+</style>
 </head>
 <body>
 <div id="main">
   <section id="header">
     <div id="logo">FARID<span>G</span></div>
 	<div id="menu">
-	  <a href="#">WORDS</a><a href="#">MENU</a>
+	  <div class="dropdown">
+	    <button id="dropbtnId" class="dropbtn">DROPDOWN <i class="fa fa-caret-down"></i></button>
+		<div id="myDropdown" class="dropdown-content">
+		  <a>Words</a>
+		  <a>IT words</a>
+		  <a>Conjunctions</a>
+		  <a></a>
+		</div>
+	  </div>
+	  <a href="#">MENU</a>
 	</div>
   </section>
   <section id="content">
@@ -25,7 +37,13 @@
 </div>
 
 <script>
-
+/*нажатие кнопки панели меню  */
+var menubtn = document.getElementById("dropbtnId");
+var dd = document.getElementById("myDropdown");
+function k(){
+  dd.classList.toggle("show");
+}
+menubtn.addEventListener("click", function(){k()});
 var verb=[
            ["I threw the banana peel into the bin","Я выбросил банановую кожуру в урну"],
 		   ["She started to throw things at me in anger","Со злости она начала швыряться в меня вещами"],
@@ -38,9 +56,10 @@ var verb=[
 		   ["This actor's performance impressed me","Игра этого актёра впечатлила меня"],
 		   ["Pirates hid their treasures in caves","Пираты прятали свои сокровища в пещерах"],
 		   ["I treasure my childhood memories","Я дорожу своими детскими воспоминаниями"],
-		   ["his assistant is a real treasure","его помощница – просто клад"],
-		   ["treasure in heart the recollection of former days","хранить в сердце память о прошлом"],
-		   ["I'm going to treasure it forever","Я буду хранить его вечно"]
+		   ["His assistant is a real treasure","Его помощница – просто клад"],
+		   ["Treasure in heart the recollection of former days","Хранить в сердце память о прошлом"],
+		   ["I'm going to treasure it forever","Я буду хранить его вечно"],
+		   ["She poured me a cup of tea","Она налила мне чашку чая"]
 		 ];
 function ru(){    // функция переключает на русский язык
   document.getElementById("display").innerHTML=  verb[firstRandom][1];
