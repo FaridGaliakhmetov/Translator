@@ -8,7 +8,7 @@
 	/*height:100vh; */
 }
 #header {
-	height:60px;
+	/*height:60px;*/
 	display:flex;
 	justify-content:space-between;
 	background-color:blue;
@@ -17,17 +17,6 @@
   display:flex;
   justify-content:center;
   align-items:center;
-}
-#menu {
-  border:2px solid white;
-  color:white;  
-  font-family: Arial, Helvetica, sans-serif; 
-}
-#menu a {
-	color:white;
-	text-decoration:none;
-	font-size:16px;
-	padding:10px 14px;
 }
 #logo {
   background-color:orange;
@@ -44,14 +33,32 @@
 	font-size:20px;
 
 }
-
+#menu {
+  color:white;  
+  font-family: Arial, Helvetica, sans-serif; 
+}
+#menu a {
+	text-decoration:none;
+	
+    	
+}
+.dropdown {
+	
+}
+.myMenu {
+	padding:20px 10px;
+	border:none;
+	outline:none;
+	display:block;
+	margin:0;
+	font-size:16px;
+	font-family:inherit;
+	font-weight:bold;
+	color:white;
+}
 .dropbtn {
 	background-color:blue;
-	border:none;
-	color:white;
 	cursor:pointer;
-	font-size:16px;
-	padding:10px 14px;
 }
 .dropbtn:hover, .dropbtn:focus, #menu > a:hover {
 	background-color:red;
@@ -66,11 +73,17 @@
 	background-color: #f1f1f1;
 	min-width: 120px;
 	text-decoration:none;
-	padding:12px 16px;
+	
 }
-#myDropdown a {
+.dropdown-content a {
 	display:block;
 	color:black;
+	padding:12px 26px;
+	text-align:left;
+	/*border:2px solid;*/
+}
+.dropdown-content a:hover {
+  background-color: #ddd;
 }
 .show {
   display:block;  

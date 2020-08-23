@@ -15,15 +15,15 @@
     <div id="logo">FARID<span>G</span></div>
 	<div id="menu">
 	  <div class="dropdown">
-	    <button id="dropbtnId" class="dropbtn">DROPDOWN <i class="fa fa-caret-down"></i></button>
+	    <button id="dropbtnId" class="dropbtn myMenu">DROPDOWN <i class="fa fa-caret-down"></i></button>
 		<div id="myDropdown" class="dropdown-content">
 		  <a>Words</a>
 		  <a>IT words</a>
 		  <a>Conjunctions</a>
-		  <a></a>
+		  <a>Prepositions</a>
 		</div>
 	  </div>
-	  <a href="#">MENU</a>
+	  <a class="myMenu" href="#">MENU</a>
 	</div>
   </section>
   <section id="content">
@@ -44,6 +44,16 @@ function k(){
   dd.classList.toggle("show");
 }
 menubtn.addEventListener("click", function(){k()});
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
 var verb=[
            ["I threw the banana peel into the bin","Я выбросил банановую кожуру в урну"],
 		   ["She started to throw things at me in anger","Со злости она начала швыряться в меня вещами"],
@@ -59,7 +69,19 @@ var verb=[
 		   ["His assistant is a real treasure","Его помощница – просто клад"],
 		   ["Treasure in heart the recollection of former days","Хранить в сердце память о прошлом"],
 		   ["I'm going to treasure it forever","Я буду хранить его вечно"],
-		   ["She poured me a cup of tea","Она налила мне чашку чая"]
+		   ["She poured me a cup of tea","Она налила мне чашку чая"],
+		   ["I have a bad memory for faces","У меня плохая память на лица"],
+		   ["Pressing memories of the past rushed upon him","На него нахлынули тягостные воспоминания о прошлом"],
+		   ["The author published a book of recollections from his youth","Автор опубликовал сборник воспоминаний о своей молодости"],
+		   ["My recollection of it is distinct","Я помню это совершенно отчётливо"],
+		   ["If my recollection is correct","Если мне не изменяет память"],
+		   ["Last week I spent a lot of money on food","На прошлой неделе я тратил много денег на еду"],
+		   ["The two parties accepted the terms of the deal","Обе стороны приняли условия соглашения"],
+		   ["The companies made a deal that benefits both parties","Компании заключили сделку, которая принесёт пользу обеим сторонам"],
+		   ["Great deal","Большая часть"],
+		   ["The company sells a great deal of its product abroad","Большую часть своей продукции компания продаёт за рубежом"],
+		   ["Doing yoga strengthens body and soul","Занятия йогой укрепляют тело и душу"],
+		   ["Run into","Сталкиваться с кем-л./чем-л. ; Врезаться во что-л. "]
 		 ];
 function ru(){    // функция переключает на русский язык
   document.getElementById("display").innerHTML=  verb[firstRandom][1];
@@ -80,7 +102,7 @@ function en(){    // функция переключает на английск
 	 
 function randomRange(myMin, myMax) {return Math.floor(Math.random()*(myMax-myMin+1)) + myMin;}; //функция получения случайного числа
 
-function rightArrow(){
+function rightArrow(){        // запускается при нажатии кнопки  вправо
   if(clickedLanguage==="ru" && secDisplayShow===0 ){
     secDisplay.innerHTML = verb[firstRandom][0];
 	secDisplayShow=1;
@@ -107,7 +129,7 @@ function rightArrow(){
   }	
 }
 
-function leftArrow(){
+function leftArrow(){       // кнопка  влево
   firstRandom-=1;
   if(firstRandom<0){
     firstRandom=verb.length-1;
