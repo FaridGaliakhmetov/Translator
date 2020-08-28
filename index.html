@@ -18,9 +18,9 @@
 	    <button id="dropbtnId" class="dropbtn myMenu">DROPDOWN <i class="fa fa-caret-down"></i></button>
 		<div id="myDropdown" class="dropdown-content">
 		  <a>Words</a>
-		  <a>IT words</a>
-		  <a>Conjunctions</a>
-		  <a>Prepositions</a>
+		  <a>Adverb</a>
+		  <a>Conjunction</a>
+		  <a>Preposition</a>
 		</div>
 	  </div>
 	  <a class="myMenu" href="#">MENU</a>
@@ -37,23 +37,7 @@
 </div>
 
 <script>
-/*нажатие кнопки панели меню  */
-var menubtn = document.getElementById("dropbtnId");
-var dd = document.getElementById("myDropdown");
-function k(){
-  dd.classList.toggle("show");
-}
-menubtn.addEventListener("click", function(){k()});
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(e) {
-  if (!e.target.matches('.dropbtn')) {
-  var myDropdown = document.getElementById("myDropdown");
-    if (myDropdown.classList.contains('show')) {
-      myDropdown.classList.remove('show');
-    }
-  }
-}
 var verb=[
            ["I threw the banana peel into the bin","Я выбросил банановую кожуру в урну"],
 		   ["She started to throw things at me in anger","Со злости она начала швыряться в меня вещами"],
@@ -81,8 +65,102 @@ var verb=[
 		   ["Great deal","Большая часть"],
 		   ["The company sells a great deal of its product abroad","Большую часть своей продукции компания продаёт за рубежом"],
 		   ["Doing yoga strengthens body and soul","Занятия йогой укрепляют тело и душу"],
-		   ["Run into","Сталкиваться с кем-л./чем-л. ; Врезаться во что-л. "]
+		   ["Run into","Сталкиваться с кем-л./чем-л. ; Врезаться во что-л. "],
+		   ["I remember everything I learned at school","Я помню всё, что я учил в школе"],
+		   ["Superiors and employees treat one another with respect","Начальники и сотрудники относятся друг к другу с уважением"],
+		   ["The nurse treated my cut finger with alcohol","Медсестра обработала мой порезанный палец спиртом"]
 		 ];
+var conjunction = [
+           ["for","ибо, ввиду того, что"],
+		   ["yet","однако, все же, но"],
+		   ["nor","не, ни, также не"],
+		   ["so","так что, поэтому, следовательно"],
+		   ["as","так как"],
+		   ["before","перед тем, как"],
+		   ["since","так как, с тех пор, как"],
+		   ["that","что, чтобы"],
+		   ["till","пока, до тех пор, пока"],
+		   ["unless"," пока не, если не"],
+		   ["whether","ли"],
+		   ["where","где"],
+		   ["although","хотя, несмотря на то, что"],
+		   ["once","как только (часто не переводится)"],
+		   ["than","чем, нежели, разве только"],
+		   ["though","хотя, несмотря на"],
+		   ["until","до тех пор, пока"],
+		   ["whenever","всякий раз, когда, когда бы ни"],
+		   ["while","в то время, как"],
+		   ["both ... and","и ... и"],
+		   ["either ... or","или ... или"],
+		   ["not only ... but (also)","не только ... но и"],
+		   ["rather ... or","или ... или"],
+		   ["just as ... so","как ... так и ..."],
+		   ["neither ... nor","ни ... ни"],
+		   ["whether ... or","то ли ... то ли, или ... или"],
+		   ["if ... then","если ... то"],
+		   ["after all","все же, тем не менее"],
+		   ["also","также, к тому же"],
+		   ["as a result","в результате"],
+		   ["besides","к тому же"],
+		   ["consequently","следовательно, поэтому"],
+		   ["however","однако"],
+		   ["in addition","в дополнение"],
+		   ["in fact","на самом деле, фактически"],
+		   ["in other words","другими словами"],
+		   ["meanwhile","тем временем, между тем"],
+		   ["moreover","более того, к тому же"],
+		   ["on the other hand","с другой стороны"],
+		   ["therefore","по этой причине"],
+		   ["thus","так, таким образом"],
+		   ["then","потом, после"],
+		   ["as if","как будто"],
+		   ["in case","в случае, если"],
+		   ["as well as","так же как"],
+		   ["not only ... but also","не только ... но и"],
+		   ["whether ... or","или ... или"],
+		   ["neither ... nor","ни ... ни"] 
+         ]
+		 
+/*раздел меню*/
+/*нажатие кнопки панели меню  */
+var menubtn = document.getElementById("dropbtnId");
+var dd = document.getElementById("myDropdown");
+function k(){
+  dd.classList.toggle("show");
+}
+menubtn.addEventListener("click", function(){k()});
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
+
+/*тело сайта*/		 
+var clickedLanguage;     // показывает какой язык выбран "ru" по умолчанию
+var secDisplayShow=0;   // показывает отображен ли перевод фразы 0-нет 1-да
+var firstRandom = randomRange(0, verb.length-1);  //	получение случайного числа от 0 до verb.length-1
+var enBut = document.getElementById("enbut");
+var ruBut = document.getElementById("rubut");
+var rightbut = document.getElementById("right");
+var leftbut= document.getElementById("left");	
+var display =document.getElementById("display");	 
+var secDisplay = document.getElementById("secdisplay");
+
+//при начальной загрузке
+ru();  //переключает на русский язык по умолчанию при загрузке страницы
+
+enBut.addEventListener("click", function(){en();});  // переключает на английский
+ruBut.addEventListener("click", function(){ru();});  //перекючает на руский
+//нажатие кнопки right and left
+rightbut.addEventListener("click", function(){rightArrow();});
+leftbut.addEventListener("click", function(){leftArrow();});
+
+		 
 function ru(){    // функция переключает на русский язык
   document.getElementById("display").innerHTML=  verb[firstRandom][1];
   document.getElementById("secdisplay").innerHTML=  "";
@@ -145,26 +223,6 @@ function leftArrow(){       // кнопка  влево
     secDisplayShow=0;
   }
 }
-
-
-var clickedLanguage;     // показывает какой язык выбран "ru" по умолчанию
-var secDisplayShow=0;   // показывает отображен ли перевод фразы 0-нет 1-да
-var firstRandom = randomRange(0, verb.length-1);  //	получение случайного числа от 0 до verb.length-1
-var enBut = document.getElementById("enbut");
-var ruBut = document.getElementById("rubut");
-var rightbut = document.getElementById("right");
-var leftbut= document.getElementById("left");	
-var display =document.getElementById("display");	 
-var secDisplay = document.getElementById("secdisplay");
-
-//при начальной загрузке
-ru();  //переключает на русский язык по умолчанию при загрузке страницы
-
-enBut.addEventListener("click", function(){en();});
-ruBut.addEventListener("click", function(){ru();});
-//нажатие кнопки right and left
-rightbut.addEventListener("click", function(){rightArrow();});
-leftbut.addEventListener("click", function(){leftArrow();});
 
 </script>
 </body>
