@@ -84,6 +84,7 @@
 }
 .dropdown-content a:hover {
   background-color: #ddd;
+  cursor:pointer;
 }
 .show {
   display:block;  
@@ -111,6 +112,9 @@
 #buttons {
 	margin-bottom:0;
 	
+}
+#headerAr {
+	margin:30px 10px 0px 10px;
 }
 #display,#secdisplay {
 	margin:80px 10px 10px 10px;

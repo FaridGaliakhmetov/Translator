@@ -17,10 +17,10 @@
 	  <div class="dropdown">
 	    <button id="dropbtnId" class="dropbtn myMenu">DROPDOWN <i class="fa fa-caret-down"></i></button>
 		<div id="myDropdown" class="dropdown-content">
-		  <a>Words</a>
-		  <a>Adverb</a>
-		  <a>Conjunction</a>
-		  <a>Preposition</a>
+		  <a id="mverb">Phrase</a>
+		  <a id="madv">Adverb</a>
+		  <a id="mconj">Conjunction</a>
+		  <a id="mprep">Preposition</a>
 		</div>
 	  </div>
 	  <a class="myMenu" href="#">MENU</a>
@@ -29,6 +29,7 @@
   <section id="content">
     <div id="contentcenter">
       <div id="engru"><button id="enbut">En</button><button id="rubut">Ru</button></div>
+	  <h1 id="headerAr"></h1>
       <p id="display"></p>
 	  <p id="secdisplay"></p>
 	</div>
@@ -98,10 +99,22 @@ var conjunction = [
 		   ["neither ... nor","ни ... ни"],
 		   ["whether ... or","то ли ... то ли, или ... или"],
 		   ["if ... then","если ... то"],
+		   ["as if","как будто"],
+		   ["in case","в случае, если"],
+		   ["as well as","так же как"],
+		   ["not only ... but also","не только ... но и"],
+		   ["whether ... or","или ... или"],
+		   ["neither ... nor","ни ... ни"] 
+         ]
+var adverb = 
+         [
+           ["additionally","допонительно"],
+           ["really","действительно, реально"],
+           ["rather","скорее, весьма, довоьно"],
+		   ["besides","к тому же; кроме того"],
 		   ["after all","все же, тем не менее"],
 		   ["also","также, к тому же"],
 		   ["as a result","в результате"],
-		   ["besides","к тому же"],
 		   ["consequently","следовательно, поэтому"],
 		   ["however","однако"],
 		   ["in addition","в дополнение"],
@@ -113,16 +126,15 @@ var conjunction = [
 		   ["therefore","по этой причине"],
 		   ["thus","так, таким образом"],
 		   ["then","потом, после"],
-		   ["as if","как будто"],
-		   ["in case","в случае, если"],
-		   ["as well as","так же как"],
-		   ["not only ... but also","не только ... но и"],
-		   ["whether ... or","или ... или"],
-		   ["neither ... nor","ни ... ни"] 
-         ]
+           ["ever","когда-либо, постоянно, всегда"]		   
+         ]	
+var preposition =
+         [
+		   ["upon","на, по, после"],
+		   ["since","с, после"]
+		 ]		 
 		 
-/*раздел меню*/
-/*нажатие кнопки панели меню  */
+
 var menubtn = document.getElementById("dropbtnId");
 var dd = document.getElementById("myDropdown");
 function k(){
@@ -130,7 +142,7 @@ function k(){
 }
 menubtn.addEventListener("click", function(){k()});
 
-// Close the dropdown if the user clicks outside of it
+
 window.onclick = function(e) {
   if (!e.target.matches('.dropbtn')) {
   var myDropdown = document.getElementById("myDropdown");
@@ -140,10 +152,12 @@ window.onclick = function(e) {
   }
 }
 
-/*тело сайта*/		 
-var clickedLanguage;     // показывает какой язык выбран "ru" по умолчанию
-var secDisplayShow=0;   // показывает отображен ли перевод фразы 0-нет 1-да
-var firstRandom = randomRange(0, verb.length-1);  //	получение случайного числа от 0 до verb.length-1
+
+
+var select = verb;		 
+var clickedLanguage;     
+var secDisplayShow=0;   
+var firstRandom = randomRange(0, select.length-1);  
 var enBut = document.getElementById("enbut");
 var ruBut = document.getElementById("rubut");
 var rightbut = document.getElementById("right");
@@ -151,74 +165,136 @@ var leftbut= document.getElementById("left");
 var display =document.getElementById("display");	 
 var secDisplay = document.getElementById("secdisplay");
 
-//при начальной загрузке
-ru();  //переключает на русский язык по умолчанию при загрузке страницы
 
-enBut.addEventListener("click", function(){en();});  // переключает на английский
-ruBut.addEventListener("click", function(){ru();});  //перекючает на руский
-//нажатие кнопки right and left
+
+document.getElementById("headerAr").innerHTML = "Phrase";
+ru();  
+
+
+document.getElementById("mconj").onclick = function(){    
+    select=conjunction;
+	firstRandom = randomRange(0, select.length-1);  
+	if(clickedLanguage==="ru"){
+	document.getElementById("display").innerHTML=  select[firstRandom][1];
+	}
+	else{
+	  document.getElementById("display").innerHTML=  select[firstRandom][0];
+	}
+	document.getElementById("secdisplay").innerHTML=  "";
+	document.getElementById("headerAr").innerHTML = "Conjunction";
+	secDisplayShow = 0;
+  }; 
+document.getElementById("mverb").onclick = function(){    
+    select=verb;
+	firstRandom = randomRange(0, select.length-1);  
+	if(clickedLanguage==="ru"){
+	document.getElementById("display").innerHTML=  select[firstRandom][1];
+	}
+	else{
+	  document.getElementById("display").innerHTML=  select[firstRandom][0];
+	}
+	document.getElementById("secdisplay").innerHTML=  "";
+	document.getElementById("headerAr").innerHTML = "Phrase";
+	secDisplayShow = 0;
+  }; 
+document.getElementById("madv").onclick = function(){    
+    select=adverb;
+	firstRandom = randomRange(0, select.length-1);  
+	if(clickedLanguage==="ru"){
+	document.getElementById("display").innerHTML=  select[firstRandom][1];
+	}
+	else{
+	  document.getElementById("display").innerHTML=  select[firstRandom][0];
+	}
+	document.getElementById("secdisplay").innerHTML=  "";
+	document.getElementById("headerAr").innerHTML = "Adverb";
+    secDisplayShow = 0;
+  }; 
+document.getElementById("mprep").onclick = function(){    
+    select=preposition;
+	firstRandom = randomRange(0, select.length-1);  
+	if(clickedLanguage==="ru"){
+	document.getElementById("display").innerHTML=  select[firstRandom][1];
+	}
+	else{
+	  document.getElementById("display").innerHTML=  select[firstRandom][0];
+	}
+	document.getElementById("secdisplay").innerHTML=  "";
+	document.getElementById("headerAr").innerHTML = "Preposition";
+	secDisplayShow = 0;  
+  }; 
+  
+
+
+enBut.addEventListener("click", function(){en();});  
+ruBut.addEventListener("click", function(){ru();});  
+
+
 rightbut.addEventListener("click", function(){rightArrow();});
 leftbut.addEventListener("click", function(){leftArrow();});
 
+
+
 		 
-function ru(){    // функция переключает на русский язык
-  document.getElementById("display").innerHTML=  verb[firstRandom][1];
+function ru(){    
+  document.getElementById("display").innerHTML=  select[firstRandom][1];
   document.getElementById("secdisplay").innerHTML=  "";
   document.getElementById("rubut").style.backgroundColor = "hsl(0,0%,50%)";
   document.getElementById("enbut").style.backgroundColor = "hsl(150,50%,80%)";
+  secDisplayShow = 0;
   clickedLanguage="ru";
   
 }
-
-function en(){    // функция переключает на английский язык
-  document.getElementById("display").innerHTML=  verb[firstRandom][0];
+function en(){    
+  document.getElementById("display").innerHTML=  select[firstRandom][0];
   document.getElementById("secdisplay").innerHTML=  "";
   document.getElementById("enbut").style.backgroundColor = "hsl(0,0%,50%)";
   document.getElementById("rubut").style.backgroundColor = "hsl(150,50%,80%)";
   clickedLanguage="en";
+  secDisplayShow = 0;
 }
 	 
-function randomRange(myMin, myMax) {return Math.floor(Math.random()*(myMax-myMin+1)) + myMin;}; //функция получения случайного числа
+function randomRange(myMin, myMax) {return Math.floor(Math.random()*(myMax-myMin+1)) + myMin;}; 
 
-function rightArrow(){        // запускается при нажатии кнопки  вправо
+function rightArrow(){        
   if(clickedLanguage==="ru" && secDisplayShow===0 ){
-    secDisplay.innerHTML = verb[firstRandom][0];
+    secDisplay.innerHTML = select[firstRandom][0];
 	secDisplayShow=1;
   }else if(clickedLanguage==="ru" && secDisplayShow===1){ 
     firstRandom +=1
-	if(firstRandom>verb.length-1){
+	if(firstRandom>select.length-1){
 	  firstRandom=0;  
 	}
-    display.innerHTML = verb[firstRandom][1];
+    display.innerHTML = select[firstRandom][1];
     secDisplay.innerHTML = "";
 	secDisplayShow=0;
   }	
   if(clickedLanguage==="en" && secDisplayShow===0 ){
-    secDisplay.innerHTML = verb[firstRandom][1];
+    secDisplay.innerHTML = select[firstRandom][1];
 	secDisplayShow=1;
   }else if(clickedLanguage==="en" && secDisplayShow===1){ 
     firstRandom +=1
-	if(firstRandom>verb.length-1){
+	if(firstRandom>select.length-1){
 	  firstRandom=0;  
 	}
-    display.innerHTML = verb[firstRandom][0];
+    display.innerHTML = select[firstRandom][0];
     secDisplay.innerHTML = "";
 	secDisplayShow=0;
   }	
 }
 
-function leftArrow(){       // кнопка  влево
+function leftArrow(){       
   firstRandom-=1;
   if(firstRandom<0){
-    firstRandom=verb.length-1;
+    firstRandom=select.length-1;
   }
   if(clickedLanguage==="ru"){
-    display.innerHTML =verb[firstRandom][1];
+    display.innerHTML =select[firstRandom][1];
     secDisplay.innerHTML="";
     secDisplayShow=0;
   }
   else{
-    display.innerHTML =verb[firstRandom][0];
+    display.innerHTML =select[firstRandom][0];
     secDisplay.innerHTML="";
     secDisplayShow=0;
   }
